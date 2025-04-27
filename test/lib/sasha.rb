@@ -4,23 +4,16 @@ require 'securerandom'
 require 'yaml'
 require 'base64'
 
-require 'grpc/health/v1/health_services_pb'
+require 'nokogiri'
+
+require 'sasha/v1/http'
 
 module Sasha
-  class << self
-    def config
-      @config ||= Nonnative.configurations('.config/server.yml')
-    end
-
-    def health_grpc
-      @health_grpc ||= Grpc::Health::V1::Health::Stub.new('localhost:12000', :this_channel_is_insecure, channel_args: Sasha.user_agent)
-    end
-
-    def user_agent
-      @user_agent ||= Nonnative::Header.grpc_user_agent('Sasha-ruby-client/1.0 gRPC/1.0')
-    end
-  end
-
   module V1
+    class << self
+      def http
+        @http ||= Sasha::V1::HTTP.new(Nonnative.configuration.url)
+      end
+    end
   end
 end

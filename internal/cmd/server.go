@@ -9,6 +9,7 @@ import (
 	"github.com/alexfalkowski/go-service/transport"
 	"github.com/alexfalkowski/sasha/internal/config"
 	"github.com/alexfalkowski/sasha/internal/health"
+	"github.com/alexfalkowski/sasha/internal/site"
 )
 
 // RegisterServer for cmd.
@@ -17,6 +18,7 @@ func RegisterServer(command *cmd.Command) {
 		module.Module, debug.Module, feature.Module,
 		telemetry.Module, transport.Module,
 		config.Module, health.Module, cmd.Module,
+		site.Module,
 	)
 	flags.AddInput("")
 }
