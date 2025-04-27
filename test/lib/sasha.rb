@@ -6,18 +6,18 @@ require 'base64'
 
 require 'grpc/health/v1/health_services_pb'
 
-module Example
+module Sasha
   class << self
     def config
       @config ||= Nonnative.configurations('.config/server.yml')
     end
 
     def health_grpc
-      @health_grpc ||= Grpc::Health::V1::Health::Stub.new('localhost:12000', :this_channel_is_insecure, channel_args: Example.user_agent)
+      @health_grpc ||= Grpc::Health::V1::Health::Stub.new('localhost:12000', :this_channel_is_insecure, channel_args: Sasha.user_agent)
     end
 
     def user_agent
-      @user_agent ||= Nonnative::Header.grpc_user_agent('Example-ruby-client/1.0 gRPC/1.0')
+      @user_agent ||= Nonnative::Header.grpc_user_agent('Sasha-ruby-client/1.0 gRPC/1.0')
     end
   end
 

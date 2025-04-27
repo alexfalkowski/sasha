@@ -4,7 +4,7 @@ processes:
   - name: server
     go:
       output: reports
-      executable: ../go-service-template
+      executable: ../sasha
       command: server
       parameters: ["-i env:CONFIG_FILE"]
     timeout: 5

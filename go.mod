@@ -1,4 +1,4 @@
-module github.com/alexfalkowski/go-service-template
+module github.com/alexfalkowski/sasha
 
 go 1.24.0
 
