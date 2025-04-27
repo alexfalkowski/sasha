@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.2.0](https://github.com/alexfalkowski/sasha/releases/tag/v0.2.0) - 2025-04-27
+
+- [`bba848f`](https://github.com/alexfalkowski/sasha/commit/bba848ffa83f94b647146559f34bb83a250acf23) feat(site): add a basic layout (#3)
+
 ## [v0.1.0](https://github.com/alexfalkowski/sasha/releases/tag/v0.1.0) - 2025-04-27
 
 - [`4329697`](https://github.com/alexfalkowski/sasha/commit/4329697ccf11d3a74be8051ebb30099ca70dc5e5) feat(init): init sasha (#2)
