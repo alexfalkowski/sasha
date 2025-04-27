@@ -4,47 +4,21 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/alexfalkowski/sasha.svg)](https://pkg.go.dev/github.com/alexfalkowski/sasha)
 [![Stability: Active](https://masterminds.github.io/stability/active.svg)](https://masterminds.github.io/stability/active.html)
 
-# Service
+# Sasha's Adventures
 
-Make sure you add the name of the service what what it is.
+This site contains all my lovely wifes adventures.
 
 ## Background
 
-Add a background.
-
-### Why a service?
-
-Why is it important to have a service.
-
-## Server
-
-Explain the server side of things.
-
-## Health
-
-The system defines a way to monitor all of it's dependencies.
-
-To configure we just need the have the following configuration:
-
-```yaml
-health:
-  duration: 1s (how often to check)
-  timeout: 1s (when we should timeout the check)
-```
-
-## Deployment
-
-Since we are advocating building microservices, you would normally use a [container orchestration system](https://newrelic.com/blog/best-practices/container-orchestration-explained). Here is what we recommend when using this system:
-- You could have a global migration service or shard these services per [bounded context](https://martinfowler.com/bliki/BoundedContext.html).
-- The client should be used as an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/).
+Try the ideas outlined in https://alejandrofalkowski.substack.com/p/hyperprogress
 
 ## Design
 
-Add anything interesting about the design.
+The design is heavily reliant on [mvc](https://github.com/alexfalkowski/go-service/tree/master/net/http/mvc).
 
-## Other Systems
+### Server
 
-Describe any other similar systems you took inspiration from.
+The server code contains health and mvc. To get a better idea take a look at the site [layout](internal/site).
 
 ## Development
 
@@ -57,8 +31,8 @@ The project follows the structure in [golang-standards/project-layout](https://g
 ### Dependencies
 
 Please make sure that you have the following installed:
-- [Ruby](.ruby-version)
-- [Golang](go.mod)
+- [Ruby](https://www.ruby-lang.org/en/)
+- [Golang](https://go.dev/)
 
 ### Style
 
