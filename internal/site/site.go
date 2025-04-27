@@ -8,6 +8,7 @@ import (
 )
 
 //go:embed **/*.tmpl
+//go:embed **/*.yaml
 //go:embed **/*.txt
 var filesystem embed.FS
 

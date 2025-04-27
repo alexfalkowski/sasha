@@ -14,7 +14,11 @@
   <header>
     <nav>
       <ul>
-        <li><strong x-data="{ message: 'Sasha's Adventures' }" x-text="message"></strong></li>
+        <li><strong>Sasha's Adventures</strong></li>
+      </ul>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a hx-get="/articles" hx-target="#main" hx-push-url="true">Articles</a></li>
       </ul>
     </nav>
   </header>
@@ -34,7 +38,7 @@
   </main>
   <footer>
     <small>
-      Copyright © {{.Year}} Sasha's Adventures v({{.Version}}). All Rights Reserved.
+      Copyright © {{.Year}} Sasha's Adventures (v{{.Version}}). All Rights Reserved.
     </small>
   </footer>
 </body>
