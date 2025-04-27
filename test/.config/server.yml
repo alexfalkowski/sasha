@@ -10,7 +10,7 @@ limiter:
   interval: 1s
 telemetry:
   logger:
-    kind: text
+    kind: tint
     level: debug
   metrics:
     kind: prometheus
@@ -25,12 +25,3 @@ transport:
       backoff: 100ms
       timeout: 10s
     timeout: 5s
-    user_agent: "Example-server/1.0 HTTP/1.0"
-  grpc:
-    address: :12000
-    retry:
-      attempts: 3
-      backoff: 100ms
-      timeout: 10s
-    timeout: 5s
-    user_agent: "Example-server/1.0 gRPC/1.0"

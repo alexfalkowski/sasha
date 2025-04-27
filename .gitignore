@@ -3,4 +3,5 @@ vendor
 *.prof
 *.cov
 *.out
+tmp
 /sasha

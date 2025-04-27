@@ -9,11 +9,17 @@ When('I visit {string}') do |section|
   @response = Sasha::V1.http.send(section, opts)
 end
 
-Then('I should see {string}') do |section|
-  expect(@response.code).to eq(200)
+Then('I should see {string} with status {int}') do |section, status|
+  expect(@response.code).to eq(status)
   expect(@response.headers[:content_type]).to eq('text/html; charset=utf-8')
 
-  m = { 'root' => "Sasha's Adventures" }
+  m = {
+    'root' => "Sasha's Adventures",
+    'home' => "Sasha's Adventures",
+    'articles' => 'Articles',
+    'article' => 'This is article 1.',
+    'article_not_found' => 'Article not found!'
+  }
   html = Nokogiri::HTML.parse(@response.body)
 
   expect(html.text).to include(m[section])
