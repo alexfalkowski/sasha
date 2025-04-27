@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	hc "github.com/alexfalkowski/go-service/net/http/context"
+	"github.com/alexfalkowski/go-service/net/http/meta"
 	"github.com/alexfalkowski/go-service/net/http/mvc"
 )
 
@@ -17,11 +17,13 @@ func Register(repo Repository) error {
 	})
 
 	mvc.Route("GET /article/{slug}", func(ctx context.Context) (mvc.View, *Article, error) {
-		slug := hc.Request(ctx).PathValue("slug")
+		req := meta.Request(ctx)
+		res := meta.Response(ctx)
+		slug := req.PathValue("slug")
 
 		model := repo.GetArticle(slug)
 		if model == nil {
-			hc.Response(ctx).WriteHeader(http.StatusNotFound)
+			res.WriteHeader(http.StatusNotFound)
 		}
 
 		return mvc.View("article.tmpl"), model, nil
