@@ -27,5 +27,7 @@ func Register(repo Repository) error {
 		return mvc.View("article.tmpl"), model, nil
 	})
 
+	mvc.StaticPathValue("GET /images/{image}", "image", "images")
+
 	return nil
 }
