@@ -9,21 +9,25 @@
   <p>
     Vacations are important for overall well-being, providing a break from routine, reducing stress, and improving physical and mental health.
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Link</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{range .Articles}}
+  {{ if gt (len .Articles) 0 }}
+    <table>
+      <thead>
         <tr>
-          <td>{{.Title}}</td>
-          <td><a hx-get="/article/{{.Slug}}" hx-target="#main" hx-push-url="true">Read</a></td>
+          <th scope="col">Article</th>
         </tr>
-      {{end}}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {{ range .Articles }}
+          <tr>
+            <td><a hx-get="/article/{{ .Slug }}" hx-target="#main" hx-push-url="true">{{ .Name }}</a></td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  {{ else }}
+    <p>
+      No articles!
+    </p>
+  {{ end }}
 </article>
 

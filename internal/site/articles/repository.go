@@ -42,7 +42,7 @@ func (r *FSRepository) GetArticles() *Model {
 	runtime.Must(err)
 
 	slices.SortFunc(ptr.Articles, func(a, b *Article) int {
-		return cmp.Compare(a.Title, b.Title)
+		return cmp.Compare(a.Name, b.Name)
 	})
 
 	return ptr

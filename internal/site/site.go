@@ -10,6 +10,7 @@ import (
 //go:embed **/*.tmpl
 //go:embed **/*.yaml
 //go:embed **/*.txt
+//go:embed **/*.jpg
 var filesystem embed.FS
 
 // NewFS for site.
