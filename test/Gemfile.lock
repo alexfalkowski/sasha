@@ -75,6 +75,10 @@ GEM
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     netrc (0.11.0)
+    nokogiri (1.18.8-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x86_64-linux-gnu)
+      racc (~> 1.4)
     nonnative (1.93.0)
       concurrent-ruby (>= 1, < 2)
       config (>= 5, < 6)
@@ -180,9 +184,10 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  nokogiri
   nonnative
   rubocop
   ruby-lsp
 
 BUNDLED WITH
-   2.6.3
+   2.6.8
