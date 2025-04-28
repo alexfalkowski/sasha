@@ -3,23 +3,40 @@
 module Sasha
   module V1
     class HTTP < Nonnative::HTTPClient
-      def root(opts = {})
+      def get_root(opts = {})
         get('/', opts)
       end
 
-      def articles(opts = {})
+      def put_root(opts = {})
+        put('/', opts)
+      end
+
+      def get_articles(opts = {})
         get('/articles', opts)
       end
 
-      def article(opts = {})
+      def put_articles(opts = {})
+        put('/articles', opts)
+      end
+
+      def get_article(opts = {})
         get('/article/article-1', opts)
       end
 
-      def article_not_found(opts = {})
+      def put_article(opts = {})
+        put('/article/article-1', opts)
+      end
+
+      def get_article_not_found(opts = {})
         get('/article/none', opts)
       end
 
-      alias home root
+      def put_article_not_found(opts = {})
+        put('/article/none', opts)
+      end
+
+      alias get_home get_root
+      alias put_home put_root
     end
   end
 end
