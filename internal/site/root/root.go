@@ -15,6 +15,14 @@ type Model struct {
 // Register root.
 func Register(info *meta.Info) {
 	mvc.Route("GET /", func(_ context.Context) (*mvc.View, *Model, error) {
-		return mvc.NewView("root/root.tmpl"), &Model{Info: info}, nil
+		model := &Model{Info: info}
+
+		return mvc.NewView("root/root.tmpl"), model, nil
+	})
+
+	mvc.Route("PUT /", func(_ context.Context) (*mvc.View, *Model, error) {
+		model := &Model{Info: info}
+
+		return mvc.NewPartialView("root/root.tmpl"), model, nil
 	})
 }

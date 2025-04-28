@@ -19,6 +19,6 @@ func NewFileSystem() fs.FS {
 }
 
 // NewLayout for site.
-func NewLayout() mvc.Layout {
-	return mvc.Layout("root/layout.tmpl")
+func NewLayout() *mvc.Layout {
+	return mvc.NewLayout("root/full.tmpl", "root/partial.tmpl")
 }

@@ -23,18 +23,18 @@ type Repository interface {
 
 // NewRepository for books.
 func NewRepository(info *meta.Info, filesystem fs.FS, enc *yaml.Encoder) Repository {
-	return &FSRepository{info: info, filesystem: filesystem, enc: enc}
+	return &FileSystemRepository{info: info, filesystem: filesystem, enc: enc}
 }
 
 // FSRepository has books in a file.
-type FSRepository struct {
+type FileSystemRepository struct {
 	info       *meta.Info
 	filesystem fs.FS
 	enc        *yaml.Encoder
 }
 
 // GetArticles from a file.
-func (r *FSRepository) GetArticles() *Model {
+func (r *FileSystemRepository) GetArticles() *Model {
 	articles, err := fs.ReadFile(r.filesystem, "articles/articles.yaml")
 	runtime.Must(err)
 
@@ -53,7 +53,7 @@ func (r *FSRepository) GetArticles() *Model {
 }
 
 // GetArticle by slug.
-func (r *FSRepository) GetArticle(slug string) *Article {
+func (r *FileSystemRepository) GetArticle(slug string) *Article {
 	articles := r.GetArticles().Articles
 
 	index := slices.IndexFunc(articles, func(a *Article) bool { return a.Slug == slug })
