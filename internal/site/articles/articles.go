@@ -10,19 +10,19 @@ import (
 
 // Register books.
 func Register(repo Repository) error {
-	mvc.Route("GET /articles", func(_ context.Context) (*mvc.View, *Model, error) {
+	mvc.Get("/articles", func(_ context.Context) (*mvc.View, *Model, error) {
 		model := repo.GetArticles()
 
 		return mvc.NewView("articles/articles.tmpl"), model, nil
 	})
 
-	mvc.Route("PUT /articles", func(_ context.Context) (*mvc.View, *Model, error) {
+	mvc.Put("/articles", func(_ context.Context) (*mvc.View, *Model, error) {
 		model := repo.GetArticles()
 
 		return mvc.NewPartialView("articles/articles.tmpl"), model, nil
 	})
 
-	mvc.Route("GET /article/{slug}", func(ctx context.Context) (*mvc.View, *Article, error) {
+	mvc.Get("/article/{slug}", func(ctx context.Context) (*mvc.View, *Article, error) {
 		req := meta.Request(ctx)
 		res := meta.Response(ctx)
 		slug := req.PathValue("slug")
@@ -35,7 +35,7 @@ func Register(repo Repository) error {
 		return mvc.NewView("articles/article.tmpl"), model, nil
 	})
 
-	mvc.Route("PUT /article/{slug}", func(ctx context.Context) (*mvc.View, *Article, error) {
+	mvc.Put("/article/{slug}", func(ctx context.Context) (*mvc.View, *Article, error) {
 		req := meta.Request(ctx)
 		res := meta.Response(ctx)
 		slug := req.PathValue("slug")
