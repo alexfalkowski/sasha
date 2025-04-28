@@ -1,46 +1,14 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sasha's Adventures</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css" />
-</head>
-
-<body>
-  <header>
-    <nav>
-      <ul>
-        <li><strong>Sasha's Adventures</strong></li>
-      </ul>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a hx-get="/articles" hx-target="#main" hx-push-url="true">Articles</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main id="main">
-    <article>
-      <h2>Welcome</h2>
-      <blockquote>
-        “The biggest adventure you can ever take is to live the life of your dreams.”
-        <footer>
-          <cite>— Oprah Winfrey</cite>
-        </footer>
-      </blockquote>
-      <p>
-        Adventures are important because they foster personal growth, provide a sense of freedom and fulfillment, and can strengthen relationships.
-      </p>
-    </article>
-  </main>
-  <footer>
-    <small>
-      Copyright © {{.Year}} Sasha's Adventures (v{{.Version}}). All Rights Reserved.
-    </small>
-  </footer>
-</body>
-
-</html>
+{{ define "content" }}
+  <article>
+    <h2>Welcome</h2>
+    <blockquote>
+      “The biggest adventure you can ever take is to live the life of your dreams.”
+      <footer>
+        <cite>— Oprah Winfrey</cite>
+      </footer>
+    </blockquote>
+    <p>
+      Adventures are important because they foster personal growth, provide a sense of freedom and fulfillment, and can strengthen relationships.
+    </p>
+  </article>
+{{ end }}

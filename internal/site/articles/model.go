@@ -1,17 +1,21 @@
 package articles
 
+import "github.com/alexfalkowski/sasha/internal/site/meta"
+
 type (
 	// Model for articles.
 	Model struct {
-		Articles []*Article `yaml:"articles,omitempty"`
+		*meta.Info `yaml:"-"`
+		Articles   []*Article `yaml:"articles,omitempty"`
 	}
 
 	// Article for our site.
 	Article struct {
-		Name   string   `yaml:"name,omitempty"`
-		Body   string   `yaml:"body,omitempty"`
-		Slug   string   `yaml:"slug,omitempty"`
-		Images []*Image `yaml:"images,omitempty"`
+		*meta.Info `yaml:"-"`
+		Name       string   `yaml:"name,omitempty"`
+		Body       string   `yaml:"body,omitempty"`
+		Slug       string   `yaml:"slug,omitempty"`
+		Images     []*Image `yaml:"images,omitempty"`
 	}
 
 	// Image for article.

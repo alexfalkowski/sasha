@@ -10,13 +10,13 @@ import (
 
 // Register books.
 func Register(repo Repository) error {
-	mvc.Route("GET /articles", func(_ context.Context) (mvc.View, *Model, error) {
+	mvc.Route("GET /articles", func(_ context.Context) (*mvc.View, *Model, error) {
 		model := repo.GetArticles()
 
-		return mvc.View("articles.tmpl"), model, nil
+		return mvc.NewView("articles/articles.tmpl"), model, nil
 	})
 
-	mvc.Route("GET /article/{slug}", func(ctx context.Context) (mvc.View, *Article, error) {
+	mvc.Route("GET /article/{slug}", func(ctx context.Context) (*mvc.View, *Article, error) {
 		req := meta.Request(ctx)
 		res := meta.Response(ctx)
 		slug := req.PathValue("slug")
@@ -26,7 +26,7 @@ func Register(repo Repository) error {
 			res.WriteHeader(http.StatusNotFound)
 		}
 
-		return mvc.View("article.tmpl"), model, nil
+		return mvc.NewView("articles/article.tmpl"), model, nil
 	})
 
 	mvc.StaticPathValue("GET /images/{image}", "image", "images")
