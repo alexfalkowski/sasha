@@ -8,6 +8,8 @@ import (
 
 	"github.com/alexfalkowski/go-service/encoding/yaml"
 	"github.com/alexfalkowski/go-service/runtime"
+	"github.com/alexfalkowski/go-service/types/ptr"
+	"github.com/alexfalkowski/sasha/internal/site/meta"
 )
 
 // Repository for books.
@@ -20,12 +22,13 @@ type Repository interface {
 }
 
 // NewRepository for books.
-func NewRepository(filesystem fs.FS, enc *yaml.Encoder) Repository {
-	return &FSRepository{filesystem: filesystem, enc: enc}
+func NewRepository(info *meta.Info, filesystem fs.FS, enc *yaml.Encoder) Repository {
+	return &FSRepository{info: info, filesystem: filesystem, enc: enc}
 }
 
 // FSRepository has books in a file.
 type FSRepository struct {
+	info       *meta.Info
 	filesystem fs.FS
 	enc        *yaml.Encoder
 }
@@ -35,17 +38,18 @@ func (r *FSRepository) GetArticles() *Model {
 	articles, err := fs.ReadFile(r.filesystem, "articles/articles.yaml")
 	runtime.Must(err)
 
-	var m Model
-	ptr := &m
+	model := ptr.Zero[Model]()
 
-	err = r.enc.Decode(bytes.NewBuffer(articles), ptr)
+	err = r.enc.Decode(bytes.NewBuffer(articles), model)
 	runtime.Must(err)
 
-	slices.SortFunc(ptr.Articles, func(a, b *Article) int {
+	slices.SortFunc(model.Articles, func(a, b *Article) int {
 		return cmp.Compare(a.Name, b.Name)
 	})
 
-	return ptr
+	model.Info = r.info
+
+	return model
 }
 
 // GetArticle by slug.
@@ -57,5 +61,8 @@ func (r *FSRepository) GetArticle(slug string) *Article {
 		return nil
 	}
 
-	return articles[index]
+	article := articles[index]
+	article.Info = r.info
+
+	return article
 }
