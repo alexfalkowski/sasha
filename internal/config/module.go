@@ -11,4 +11,5 @@ var Module = fx.Options(
 	fx.Provide(config.NewConfig[Config]),
 	fx.Decorate(decorateConfig),
 	fx.Provide(healthConfig),
+	fx.Provide(articlesConfig),
 )

@@ -1,68 +1,76 @@
 package articles
 
 import (
-	"bytes"
-	"cmp"
-	"io/fs"
-	"slices"
+	"context"
+	"fmt"
 
-	"github.com/alexfalkowski/go-service/encoding/yaml"
-	"github.com/alexfalkowski/go-service/runtime"
-	"github.com/alexfalkowski/go-service/types/ptr"
+	"github.com/alexfalkowski/go-service/errors"
 	"github.com/alexfalkowski/sasha/internal/site/meta"
 )
 
 // Repository for books.
 type Repository interface {
 	// GetArticles from storage.
-	GetArticles() *Model
+	GetArticles(ctx context.Context) (*Articles, error)
 
 	// GetArticle by slug.
-	GetArticle(slug string) *Article
+	GetArticle(ctx context.Context, slug string) (*Article, error)
 }
 
 // NewRepository for books.
-func NewRepository(info *meta.Info, filesystem fs.FS, enc *yaml.Encoder) Repository {
-	return &FileSystemRepository{info: info, filesystem: filesystem, enc: enc}
+func NewRepository(info *meta.Info, config *Config, client *Client) Repository {
+	return &FileSystemRepository{info: info, config: config, client: client}
 }
 
 // FSRepository has books in a file.
 type FileSystemRepository struct {
-	info       *meta.Info
-	filesystem fs.FS
-	enc        *yaml.Encoder
+	info   *meta.Info
+	config *Config
+	client *Client
 }
 
 // GetArticles from a file.
-func (r *FileSystemRepository) GetArticles() *Model {
-	articles, err := fs.ReadFile(r.filesystem, "articles/articles.yaml")
-	runtime.Must(err)
+func (r *FileSystemRepository) GetArticles(ctx context.Context) (*Articles, error) {
+	site := &Articles{}
 
-	model := ptr.Zero[Model]()
+	if err := r.client.Get(ctx, r.config.Address+"/articles.yml", site); err != nil {
+		e := &Error{
+			err:  errors.Prefix("repository: get articles", err),
+			Info: r.info,
+		}
 
-	err = r.enc.Decode(bytes.NewBuffer(articles), model)
-	runtime.Must(err)
+		return nil, e
+	}
 
-	slices.SortFunc(model.Articles, func(a, b *Article) int {
-		return cmp.Compare(a.Name, b.Name)
-	})
+	site.Info = r.info
 
-	model.Info = r.info
-
-	return model
+	return site, nil
 }
 
 // GetArticle by slug.
-func (r *FileSystemRepository) GetArticle(slug string) *Article {
-	articles := r.GetArticles().Articles
+func (r *FileSystemRepository) GetArticle(ctx context.Context, slug string) (*Article, error) {
+	article := &Article{}
+	url := fmt.Sprintf("%s/%s/article.yml", r.config.Address, slug)
 
-	index := slices.IndexFunc(articles, func(a *Article) bool { return a.Slug == slug })
-	if index == -1 {
-		return nil
+	if err := r.client.Get(ctx, url, article); err != nil {
+		if r.client.IsNotFound(err) {
+			return nil, nil
+		}
+
+		e := &Error{
+			err:  errors.Prefix("repository: get article", err),
+			Info: r.info,
+		}
+
+		return nil, e
 	}
 
-	article := articles[index]
 	article.Info = r.info
 
-	return article
+	// Transform the images to URLs for the view,
+	for _, image := range article.Images {
+		image.Name = fmt.Sprintf("%s/%s/images/%s", r.config.Address, slug, image.Name)
+	}
+
+	return article, nil
 }

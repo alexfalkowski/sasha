@@ -4,11 +4,26 @@ log: reports/nonnative.log
 processes:
   - name: server
     go:
-      output: reports
       executable: ../sasha
       command: server
       parameters: ["-i file:.config/server.yml"]
-    timeout: 5
+      output: reports
+    timeout: 2
     host: 127.0.0.1
     port: 11000
     log: reports/server.log
+servers:
+  -
+    name: bucket
+    class: Sasha::V1::Server
+    timeout: 2
+    port: 5678
+    log: reports/bucket.log
+    proxy:
+      kind: fault_injection
+      host: 127.0.0.1
+      port: 4567
+      log: reports/proxy_bucket.log
+      wait: 2
+      options:
+        delay: 2

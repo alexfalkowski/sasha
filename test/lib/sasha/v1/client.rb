@@ -2,7 +2,7 @@
 
 module Sasha
   module V1
-    class HTTP < Nonnative::HTTPClient
+    class Client < Nonnative::HTTPClient
       def get_root(opts = {})
         get('/', opts)
       end
@@ -33,6 +33,14 @@ module Sasha
 
       def put_article_not_found(opts = {})
         put('/article/none', opts)
+      end
+
+      def get_article_error(opts = {})
+        get('/article/error', opts)
+      end
+
+      def put_article_error(opts = {})
+        put('/article/error', opts)
       end
 
       alias get_home get_root
