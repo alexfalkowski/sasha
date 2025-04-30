@@ -52,6 +52,10 @@ func (r *FileSystemRepository) GetArticles(ctx context.Context) (*model.Articles
 	site := &model.Articles{}
 
 	if err := r.client.Get(ctx, r.config.Address+"/articles.yml", site); err != nil {
+		if client.IsNotFound(err) {
+			err = ErrNotFound
+		}
+
 		e := &model.Error{
 			Err:  se.Prefix("repository: get articles", err),
 			Info: r.info,
