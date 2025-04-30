@@ -16,9 +16,8 @@ import (
 func RegisterServer(command *cmd.Command) {
 	flags := command.AddServer("server", "Start sasha server",
 		module.Module, debug.Module, feature.Module,
-		telemetry.Module, transport.Module,
-		config.Module, health.Module, cmd.Module,
-		site.Module,
+		telemetry.Module, transport.Module, config.Module,
+		health.Module, cmd.Module, site.Module,
 	)
 	flags.AddInput("")
 }

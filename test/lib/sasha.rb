@@ -6,13 +6,14 @@ require 'base64'
 
 require 'nokogiri'
 
-require 'sasha/v1/http'
+require 'sasha/v1/client'
+require 'sasha/v1/server'
 
 module Sasha
   module V1
     class << self
-      def http
-        @http ||= Sasha::V1::HTTP.new(Nonnative.configuration.url)
+      def client
+        @client ||= Sasha::V1::Client.new(Nonnative.configuration.url)
       end
     end
   end

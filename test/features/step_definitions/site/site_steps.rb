@@ -11,7 +11,7 @@ When('I visit {string} with layout {string}') do |section, layout|
   }
   method = methods[layout]
 
-  @response = Sasha::V1.http.send("#{method}_#{section}", opts)
+  @response = Sasha::V1.client.send("#{method}_#{section}", opts)
 end
 
 Then('I should see {string} with status {int}') do |section, status|
@@ -25,7 +25,16 @@ Then('I should see {string} with status {int}') do |section, status|
     'article' => 'This is article 1.',
     'article_not_found' => 'Article not found!'
   }
-  html = Nokogiri::HTML.parse(@response.body)
 
-  expect(html.text).to include(expected[section])
+  expected_section = expected[section]
+  if expected_section
+    body = @response.body
+    html = Nokogiri::HTML.parse(body)
+
+    expect(html.text).to include(expected[section])
+  end
+end
+
+Then('I should see an error with status {int}') do |status|
+  expect(@response.code).to eq(status)
 end
