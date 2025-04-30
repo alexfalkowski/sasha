@@ -11,14 +11,22 @@ import (
 )
 
 // Register books.
+//
+//nolint:funlen
 func Register(repo repository.Repository) error {
 	errorView, errorPartialView := mvc.NewViewPair("articles/error.tmpl")
 	articlesView, articlesPartialView := mvc.NewViewPair("articles/articles.tmpl")
 	articleView, articlePartialView := mvc.NewViewPair("articles/article.tmpl")
 
 	mvc.Get("/articles", func(ctx context.Context) (*mvc.View, *model.Articles, error) {
+		res := meta.Response(ctx)
+
 		model, err := repo.GetArticles(ctx)
 		if err != nil {
+			if repository.IsNotFound(err) {
+				res.WriteHeader(http.StatusNotFound)
+			}
+
 			return errorView, nil, err
 		}
 
@@ -26,8 +34,14 @@ func Register(repo repository.Repository) error {
 	})
 
 	mvc.Put("/articles", func(ctx context.Context) (*mvc.View, *model.Articles, error) {
+		res := meta.Response(ctx)
+
 		model, err := repo.GetArticles(ctx)
 		if err != nil {
+			if repository.IsNotFound(err) {
+				res.WriteHeader(http.StatusNotFound)
+			}
+
 			return errorPartialView, nil, err
 		}
 
