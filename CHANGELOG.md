@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.13.1](https://github.com/alexfalkowski/sasha/releases/tag/v0.13.1) - 2025-04-30
+
+- [`5dd0523`](https://github.com/alexfalkowski/sasha/commit/5dd0523625182389d5b984c2c2522d4d40fc7055) fix(articles): set err to not found (#16)
+
 ## [v0.13.0](https://github.com/alexfalkowski/sasha/releases/tag/v0.13.0) - 2025-04-30
 
 - [`ec76a1a`](https://github.com/alexfalkowski/sasha/commit/ec76a1abe0b6983aa1c956155a7ff3f17ce026bc) feat(articles): break up packages (#15)
