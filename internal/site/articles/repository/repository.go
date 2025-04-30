@@ -16,7 +16,13 @@ import (
 var ErrNotFound = errors.New("not found")
 
 // IsNotFound if the error is ErrNotFound.
+//
+//nolint:errorlint
 func IsNotFound(err error) bool {
+	if err, ok := err.(*model.Error); ok {
+		return errors.Is(err.Err, ErrNotFound)
+	}
+
 	return errors.Is(err, ErrNotFound)
 }
 
@@ -66,7 +72,7 @@ func (r *FileSystemRepository) GetArticle(ctx context.Context, slug string) (*mo
 
 	if err := r.client.Get(ctx, url, article); err != nil {
 		if client.IsNotFound(err) {
-			return nil, se.Prefix("repository: get article", ErrNotFound)
+			err = ErrNotFound
 		}
 
 		e := &model.Error{
