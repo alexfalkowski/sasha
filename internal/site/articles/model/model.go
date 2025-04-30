@@ -1,4 +1,4 @@
-package articles
+package model
 
 import "github.com/alexfalkowski/sasha/internal/site/meta"
 
@@ -27,11 +27,11 @@ type (
 	// Error for site.
 	Error struct {
 		*meta.Info
-		err error
+		Err error
 	}
 )
 
 // Error satisfies the error interface.
 func (e *Error) Error() string {
-	return e.err.Error()
+	return e.Err.Error()
 }

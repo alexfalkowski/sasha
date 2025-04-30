@@ -1,10 +1,14 @@
 package articles
 
-import "go.uber.org/fx"
+import (
+	"github.com/alexfalkowski/sasha/internal/site/articles/client"
+	"github.com/alexfalkowski/sasha/internal/site/articles/repository"
+	"go.uber.org/fx"
+)
 
 // Module for fx.
 var Module = fx.Options(
-	fx.Provide(NewClient),
-	fx.Provide(NewRepository),
+	client.Module,
+	repository.Module,
 	fx.Invoke(Register),
 )

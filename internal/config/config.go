@@ -4,7 +4,7 @@ import (
 	"github.com/alexfalkowski/go-service/config"
 	"github.com/alexfalkowski/sasha/internal/health"
 	"github.com/alexfalkowski/sasha/internal/site"
-	"github.com/alexfalkowski/sasha/internal/site/articles"
+	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 )
 
 // Config for the service.

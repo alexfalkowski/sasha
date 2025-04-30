@@ -1,6 +1,5 @@
 {{ define "content" }}
   <article>
-  {{ if . }}
     <h2>{{.Name}}</h2>
     <p>
       {{.Body}}
@@ -32,10 +31,5 @@
         No images!
       </p>
     {{ end }}
-  {{ else }}
-    <p>
-      Article not found!
-    </p>
-  {{ end }}
   </article>
 {{ end }}
