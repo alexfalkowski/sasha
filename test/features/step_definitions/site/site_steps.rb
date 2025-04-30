@@ -23,7 +23,7 @@ Then('I should see {string} with status {int}') do |section, status|
     'home' => 'Oprah Winfrey',
     'articles' => 'Articles',
     'article' => 'This is article 1.',
-    'article_not_found' => 'Article not found!'
+    'article_not_found' => 'repository: get article: not found'
   }
 
   expected_section = expected[section]

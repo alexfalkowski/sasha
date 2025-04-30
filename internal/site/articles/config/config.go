@@ -1,4 +1,4 @@
-package articles
+package config
 
 import "github.com/alexfalkowski/go-service/client"
 

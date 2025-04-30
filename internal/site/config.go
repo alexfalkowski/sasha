@@ -1,8 +1,6 @@
 package site
 
-import (
-	"github.com/alexfalkowski/sasha/internal/site/articles"
-)
+import articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 
 // Config for the site.
 type Config struct {

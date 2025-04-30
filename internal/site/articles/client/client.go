@@ -1,4 +1,4 @@
-package articles
+package client
 
 import (
 	"context"
@@ -15,6 +15,7 @@ import (
 	"github.com/alexfalkowski/go-service/telemetry/metrics"
 	"github.com/alexfalkowski/go-service/telemetry/tracer"
 	th "github.com/alexfalkowski/go-service/transport/http"
+	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"go.uber.org/fx"
 )
 
@@ -26,15 +27,20 @@ var (
 	ErrInternal = errors.New("client: resource had internal issue")
 )
 
-// ClientParams for konfig.
-type ClientParams struct {
+// IsNotFound if the error is ErrNotFound.
+func IsNotFound(err error) bool {
+	return errors.Is(err, ErrNotFound)
+}
+
+// Params for konfig.
+type Params struct {
 	fx.In
 
 	Lifecycle fx.Lifecycle
 	Tracer    *tracer.Tracer
 	Meter     *metrics.Meter
 	ID        id.Generator
-	Client    *Config
+	Config    *articles.Config
 	Logger    *logger.Logger
 	Pool      *sync.BufferPool
 	Content   *content.Content
@@ -42,12 +48,12 @@ type ClientParams struct {
 }
 
 // NewClient for articles.
-func NewClient(params ClientParams) (*Client, error) {
+func NewClient(params Params) (*Client, error) {
 	cli, err := th.NewClient(
 		th.WithClientLogger(params.Logger), th.WithClientTracer(params.Tracer),
-		th.WithClientMetrics(params.Meter), th.WithClientRetry(params.Client.Retry),
-		th.WithClientUserAgent(params.UserAgent), th.WithClientTimeout(params.Client.Timeout),
-		th.WithClientTLS(params.Client.TLS), th.WithClientID(params.ID))
+		th.WithClientMetrics(params.Meter), th.WithClientRetry(params.Config.Retry),
+		th.WithClientUserAgent(params.UserAgent), th.WithClientTimeout(params.Config.Timeout),
+		th.WithClientTLS(params.Config.TLS), th.WithClientID(params.ID))
 	if err != nil {
 		return nil, se.Prefix("client: new http", err)
 	}
@@ -102,9 +108,4 @@ func (c *Client) Get(ctx context.Context, url string, res any) error {
 	}
 
 	return nil
-}
-
-// IsNotFound if the error is ErrNotFound.
-func (c *Client) IsNotFound(err error) bool {
-	return errors.Is(err, ErrNotFound)
 }
