@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+Before('@operational') do
+  Sasha::V1.apply_bucket_state 'operational'
+end
+
+Before('@missing') do
+  Sasha::V1.apply_bucket_state 'missing'
+end
+
+Before('@erroneous') do
+  Sasha::V1.apply_bucket_state 'erroneous'
+end
+
 When('I visit {string} with layout {string}') do |section, layout|
   opts = {
     headers: { request_id: SecureRandom.uuid, user_agent: 'Web-client/1.0 HTTP/1.0' },
@@ -14,8 +26,8 @@ When('I visit {string} with layout {string}') do |section, layout|
   @response = Sasha::V1.client.send("#{method}_#{section}", opts)
 end
 
-Then('I should see {string} with status {int}') do |section, status|
-  expect(@response.code).to eq(status)
+Then('I should see {string} succesfully') do |section|
+  expect(@response.code).to eq(200)
   expect(@response.headers[:content_type]).to eq('text/html; charset=utf-8')
 
   expected = {
@@ -35,6 +47,10 @@ Then('I should see {string} with status {int}') do |section, status|
   end
 end
 
-Then('I should see an error with status {int}') do |status|
-  expect(@response.code).to eq(status)
+Then('the {string} is not found') do |_string|
+  expect(@response.code).to eq(404)
+end
+
+Then('the {string} is erroneous') do |_string|
+  expect(@response.code).to eq(500)
 end

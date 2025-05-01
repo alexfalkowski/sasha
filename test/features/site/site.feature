@@ -1,38 +1,63 @@
+@clear_pool
 Feature: Sasha
   Sasha is a website for sasha-adventures.com
 
-  Scenario Outline: Visit successfully sections
+  @operational
+  Scenario Outline: Visit sections with public bucket
+    Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then I should see "<section>" with status <status>
+    Then I should see "<section>" succesfully
 
     Examples:
-      | layout  | section           | status |
-      | full    | root              |    200 |
-      | full    | home              |    200 |
-      | full    | articles          |    200 |
-      | full    | article           |    200 |
-      | full    | article_not_found |    404 |
-      | full    | article_error     |    500 |
-      | partial | root              |    200 |
-      | partial | home              |    200 |
-      | partial | articles          |    200 |
-      | partial | article           |    200 |
-      | partial | article_not_found |    404 |
-      | partial | article_error     |    500 |
+      | layout  | section  |
+      | full    | home     |
+      | full    | articles |
+      | full    | article  |
+      | partial | home     |
+      | partial | articles |
+      | partial | article  |
 
-  Scenario Outline: Visit unsuccessfully sections
-    Given I set the proxy for server "<server>" to "<failure>"
+  @missing
+  Scenario Outline: Visit sections with missing public bucket
+    Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then I should see an error with status <status>
-    And I should reset the proxy for server "<server>"
+    Then the "<section>" is not found
 
     Examples:
-      | layout  | section  | status | server | failure      |
-      | full    | articles |    500 | bucket | close_all    |
-      | full    | articles |    500 | bucket | invalid_data |
-      | full    | article  |    500 | bucket | close_all    |
-      | full    | article  |    500 | bucket | invalid_data |
-      | partial | articles |    500 | bucket | close_all    |
-      | partial | articles |    500 | bucket | invalid_data |
-      | partial | article  |    500 | bucket | close_all    |
-      | partial | article  |    500 | bucket | invalid_data |
+      | layout  | section  |
+      | full    | articles |
+      | full    | article  |
+      | partial | articles |
+      | partial | article  |
+
+  @erroneous
+  Scenario Outline: Visit sections with erroneous public bucket
+    Given I start the system
+    When I visit "<section>" with layout "<layout>"
+    Then the "<section>" is erroneous
+
+    Examples:
+      | layout  | section  |
+      | full    | articles |
+      | full    | article  |
+      | partial | articles |
+      | partial | article  |
+
+  @operational
+  Scenario Outline: Visit sections with various failures with the public bucket
+    Given I start the system
+    And I set the proxy for server "bucket" to "<failure>"
+    When I visit "<section>" with layout "<layout>"
+    Then the "<section>" is erroneous
+    And I should reset the proxy for server "bucket"
+
+    Examples:
+      | layout  | section  | failure      |
+      | full    | articles | close_all    |
+      | full    | articles | invalid_data |
+      | full    | article  | close_all    |
+      | full    | article  | invalid_data |
+      | partial | articles | close_all    |
+      | partial | articles | invalid_data |
+      | partial | article  | close_all    |
+      | partial | article  | invalid_data |
