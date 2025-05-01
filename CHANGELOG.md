@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v0.15.0](https://github.com/alexfalkowski/sasha/releases/tag/v0.15.0) - 2025-05-01
+
+- [`84c729d`](https://github.com/alexfalkowski/sasha/commit/84c729df4d454337be502849633ed1d9dd1b8b74) feat(site): enhance the error template (#20)
+- [`1255851`](https://github.com/alexfalkowski/sasha/commit/1255851a690344ea24f956a84920e0146935ef8c) test(articles): manually start the system to verify conditions (#19)
+
 ## [v0.14.0](https://github.com/alexfalkowski/sasha/releases/tag/v0.14.0) - 2025-05-01
 
 - [`2c32908`](https://github.com/alexfalkowski/sasha/commit/2c32908dffe798ff163f9ca7b7bc1339dee7d83d) feat(articles): remove dup (#18)
