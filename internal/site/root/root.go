@@ -16,15 +16,14 @@ type Root struct {
 func Register(info *meta.Info) {
 	rootView, rootPartialView := mvc.NewViewPair("root/root.tmpl")
 
-	mvc.Get("/", func(_ context.Context) (*mvc.View, *Root, error) {
+	mvc.Get("/", root(info, rootView))
+	mvc.Put("/", root(info, rootPartialView))
+}
+
+func root(info *meta.Info, rootView *mvc.View) mvc.Controller[Root] {
+	return func(_ context.Context) (*mvc.View, *Root, error) {
 		root := &Root{Info: info}
 
 		return rootView, root, nil
-	})
-
-	mvc.Put("/", func(_ context.Context) (*mvc.View, *Root, error) {
-		root := &Root{Info: info}
-
-		return rootPartialView, root, nil
-	})
+	}
 }
