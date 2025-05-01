@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sasha's Adventures</title>
-    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx-ext-response-targets@2.0.3" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css" />
   </head>
-  <body>
+  <body hx-ext="response-targets">
     <header>
       <nav>
         <ul>
@@ -15,7 +16,7 @@
         </ul>
         <ul>
           <li><a hx-put="/" hx-target="#main" hx-push-url="true">Home</a></li>
-          <li><a hx-put="/articles" hx-target="#main" hx-push-url="true">Articles</a></li>
+          <li><a hx-put="/articles" hx-target="#main" hx-target-*="#main" hx-push-url="true">Articles</a></li>
         </ul>
       </nav>
     </header>

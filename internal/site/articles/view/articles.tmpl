@@ -21,7 +21,7 @@
           {{ range .Articles }}
             <tr>
               <td>
-                <a hx-put="/article/{{ .Slug }}" hx-target="#main" hx-push-url="true">{{ .Name }}</a>              </td>
+                <a hx-put="/article/{{ .Slug }}" hx-target="#main" hx-target-*="#main" hx-push-url="true">{{ .Name }}</a>              </td>
             </tr>
           {{ end }}
         </tbody>
