@@ -4,7 +4,11 @@ import (
 	"time"
 
 	"github.com/alexfalkowski/go-service/env"
+	"github.com/alexfalkowski/go-service/meta"
 )
+
+// Map is an alias of meta.Map.
+type Map = meta.Map
 
 // NewYear for meta.
 func NewYear() Year {
