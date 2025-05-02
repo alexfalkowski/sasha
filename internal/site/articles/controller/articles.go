@@ -4,19 +4,16 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/alexfalkowski/go-service/net/http/meta"
 	"github.com/alexfalkowski/go-service/net/http/mvc"
 	"github.com/alexfalkowski/go-service/net/http/status"
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
 	"github.com/alexfalkowski/sasha/internal/site/articles/repository"
 )
 
-// NewArticleController for articles.
-func NewArticleController(repo repository.Repository, articleView, errorView *mvc.View) mvc.Controller[model.Article] {
-	return func(ctx context.Context) (*mvc.View, *model.Article, error) {
-		slug := meta.Request(ctx).PathValue("slug")
-
-		model, err := repo.GetArticle(ctx, slug)
+// NewArticlesController for articles.
+func NewArticlesController(repo repository.Repository, articlesView, errorView *mvc.View) mvc.Controller[model.Articles] {
+	return func(ctx context.Context) (*mvc.View, *model.Articles, error) {
+		model, err := repo.GetArticles(ctx)
 		if err != nil {
 			if repository.IsNotFound(err) {
 				err = status.FromError(http.StatusNotFound, err)
@@ -25,6 +22,6 @@ func NewArticleController(repo repository.Repository, articleView, errorView *mv
 			return errorView, nil, err
 		}
 
-		return articleView, model, nil
+		return articlesView, model, nil
 	}
 }
