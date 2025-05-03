@@ -18,17 +18,26 @@ Feature: Sasha
       | partial | article  |
 
   @missing
-  Scenario Outline: Visit sections with missing public bucket
+  Scenario Outline: Visit sections with missing public bucket that can't be found
     Given I start the system
     When I visit "<section>" with layout "<layout>"
     Then the "<section>" is not found
 
     Examples:
+      | layout  | section |
+      | full    | article |
+      | partial | article |
+
+  @missing
+  Scenario Outline: Visit sections with missing public bucket that can be found
+    Given I start the system
+    When I visit "<section>" with layout "<layout>"
+    Then I should see "<section>" succesfully
+
+    Examples:
       | layout  | section  |
       | full    | articles |
-      | full    | article  |
       | partial | articles |
-      | partial | article  |
 
   @erroneous
   Scenario Outline: Visit sections with erroneous public bucket
