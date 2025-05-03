@@ -7,6 +7,21 @@ module Sasha
     end
 
     class MissingBucket < Sinatra::Application
+      get '/articles.yml' do
+        status 404
+      end
+
+      put '/articles.yml' do
+        status 404
+      end
+
+      get '/:article/article.yml' do
+        status 404
+      end
+
+      put '/:article/article.yml' do
+        status 404
+      end
     end
 
     class ErroneousBucket < Sinatra::Application
