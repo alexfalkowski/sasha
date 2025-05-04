@@ -8,7 +8,7 @@ import (
 )
 
 //go:embed **/*.tmpl
-//go:embed articles/view/*tmpl
+//go:embed articles/view/*.tmpl
 //go:embed **/*.txt
 var filesystem embed.FS
 
