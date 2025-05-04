@@ -30,6 +30,9 @@ func (r *HTTPRepository) GetArticles(ctx context.Context) (*model.Articles, erro
 
 	if err := r.client.Get(ctx, r.config.Address+"/articles.yml", site); err != nil {
 		if client.IsNotFound(err) {
+			site.Meta = meta.Strings(ctx, "")
+			site.Info = r.info
+
 			return site, nil
 		}
 
