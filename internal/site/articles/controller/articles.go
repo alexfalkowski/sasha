@@ -8,8 +8,8 @@ import (
 	"github.com/alexfalkowski/sasha/internal/site/articles/repository"
 )
 
-// NewArticlesController for articles.
-func NewArticlesController(repo repository.Repository, articlesView, errorView *mvc.View) mvc.Controller[model.Articles] {
+// NewArticles controller.
+func NewArticles(repo repository.Repository, articlesView, errorView *mvc.View) mvc.Controller[model.Articles] {
 	return func(ctx context.Context) (*mvc.View, *model.Articles, error) {
 		model, err := repo.GetArticles(ctx)
 		if err != nil {

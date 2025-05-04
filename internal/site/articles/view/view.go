@@ -2,17 +2,17 @@ package view
 
 import "github.com/alexfalkowski/go-service/net/http/mvc"
 
-// NewErrorView for articles.
-func NewErrorView() (*mvc.View, *mvc.View) {
+// NewError view.
+func NewError() (*mvc.View, *mvc.View) {
 	return mvc.NewViewPair("articles/view/error.tmpl")
 }
 
-// NewArticleView for articles.
-func NewArticleView() (*mvc.View, *mvc.View) {
+// NewArticle view.
+func NewArticle() (*mvc.View, *mvc.View) {
 	return mvc.NewViewPair("articles/view/article.tmpl")
 }
 
-// NewArticlesView for articles.
-func NewArticlesView() (*mvc.View, *mvc.View) {
+// NewArticles view.
+func NewArticles() (*mvc.View, *mvc.View) {
 	return mvc.NewViewPair("articles/view/articles.tmpl")
 }

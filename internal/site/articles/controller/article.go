@@ -11,8 +11,8 @@ import (
 	"github.com/alexfalkowski/sasha/internal/site/articles/repository"
 )
 
-// NewArticleController for articles.
-func NewArticleController(repo repository.Repository, articleView, errorView *mvc.View) mvc.Controller[model.Article] {
+// NewArticle controller.
+func NewArticle(repo repository.Repository, articleView, errorView *mvc.View) mvc.Controller[model.Article] {
 	return func(ctx context.Context) (*mvc.View, *model.Article, error) {
 		slug := meta.Request(ctx).PathValue("slug")
 
