@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.1.0](https://github.com/alexfalkowski/sasha/releases/tag/v1.1.0) - 2025-05-04
+
+- [`78cdd89`](https://github.com/alexfalkowski/sasha/commit/78cdd8920803b203f568847188b0d3a68c9390c5) feat(repository): pass meta info (#34)
+
 ## [v1.0.0](https://github.com/alexfalkowski/sasha/releases/tag/v1.0.0) - 2025-05-04
 
 - [`7b2c265`](https://github.com/alexfalkowski/sasha/commit/7b2c265c4cc6136c1fd1a8a6a1bf050b6fc9eed5) feat(article): each section follows an mvc structure (#33)
