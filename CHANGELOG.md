@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.11.0](https://github.com/alexfalkowski/sasha/releases/tag/v1.11.0) - 2025-05-07
+
+- [`abf4679`](https://github.com/alexfalkowski/sasha/commit/abf4679d327b50f75de888c37722d59f455acc70) feat(deps): bump bin from `652fb33` to `ac9a5b2` (#46)
+
 ## [v1.10.0](https://github.com/alexfalkowski/sasha/releases/tag/v1.10.0) - 2025-05-07
 
 - [`8c64805`](https://github.com/alexfalkowski/sasha/commit/8c6480534cb7200a086220fb51f2b0bb17937fce) feat(deps): bump bin from `7b214f3` to `652fb33` (#45)
