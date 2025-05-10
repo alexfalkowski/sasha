@@ -1,6 +1,2 @@
 name: "article 1"
-body: "This is article 1."
 slug: "article-1"
-images:
-  - name: article-1.jpg
-    description: Awesome journey!

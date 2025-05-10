@@ -7,7 +7,6 @@ type Article struct {
 	*meta.Info `yaml:"-"`
 	Meta       meta.Map `yaml:"-"`
 	Name       string   `yaml:"name,omitempty"`
-	Body       string   `yaml:"body,omitempty"`
 	Slug       string   `yaml:"slug,omitempty"`
-	Images     []*Image `yaml:"images,omitempty"`
+	Body       []byte   `yaml:"-"`
 }

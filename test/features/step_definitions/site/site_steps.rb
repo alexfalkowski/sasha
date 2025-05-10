@@ -4,8 +4,16 @@ Before('@operational') do
   Sasha::V1.apply_bucket_state 'operational'
 end
 
-Before('@missing') do
-  Sasha::V1.apply_bucket_state 'missing'
+Before('@missing_articles') do
+  Sasha::V1.apply_bucket_state 'missing_articles'
+end
+
+Before('@missing_config') do
+  Sasha::V1.apply_bucket_state 'missing_config'
+end
+
+Before('@missing_body') do
+  Sasha::V1.apply_bucket_state 'missing_body'
 end
 
 Before('@erroneous') do
