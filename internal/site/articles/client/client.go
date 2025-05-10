@@ -7,7 +7,6 @@ import (
 	"github.com/alexfalkowski/go-service/env"
 	se "github.com/alexfalkowski/go-service/errors"
 	"github.com/alexfalkowski/go-service/id"
-	"github.com/alexfalkowski/go-service/mime"
 	"github.com/alexfalkowski/go-service/net/http/rest"
 	"github.com/alexfalkowski/go-service/net/http/status"
 	"github.com/alexfalkowski/go-service/telemetry/logger"
@@ -55,12 +54,10 @@ type Client struct {
 	client *rest.Client
 }
 
-// Get the url and respond with res.
-func (c *Client) Get(ctx context.Context, url string, res any) error {
-	opts := &rest.Options{
-		ContentType: mime.YAMLMediaType,
-		Response:    res,
-	}
+// Options for get.
+type Options = rest.Options
 
+// Get the url and respond with res.
+func (c *Client) Get(ctx context.Context, url string, opts *Options) error {
 	return c.client.Get(ctx, url, opts)
 }
