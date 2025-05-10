@@ -17,8 +17,8 @@ Feature: Sasha
       | partial | articles |
       | partial | article  |
 
-  @missing
-  Scenario Outline: Visit sections with missing public bucket that can't be found
+  @missing_config
+  Scenario Outline: Visit sections with missing config
     Given I start the system
     When I visit "<section>" with layout "<layout>"
     Then the "<section>" is not found
@@ -28,8 +28,19 @@ Feature: Sasha
       | full    | article |
       | partial | article |
 
-  @missing
-  Scenario Outline: Visit sections with missing public bucket that can be found
+  @missing_body
+  Scenario Outline: Visit sections with missing body
+    Given I start the system
+    When I visit "<section>" with layout "<layout>"
+    Then the "<section>" is not found
+
+    Examples:
+      | layout  | section |
+      | full    | article |
+      | partial | article |
+
+  @missing_articles
+  Scenario Outline: Visit sections with missing articles
     Given I start the system
     When I visit "<section>" with layout "<layout>"
     Then I should see "<section>" succesfully
