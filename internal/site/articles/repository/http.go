@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	se "github.com/alexfalkowski/go-service/errors"
-	"github.com/alexfalkowski/go-service/meta"
 	"github.com/alexfalkowski/go-service/mime"
 	"github.com/alexfalkowski/go-service/net/http/rest"
 	"github.com/alexfalkowski/go-service/net/http/status"
@@ -56,14 +55,12 @@ func (r *HTTPRepository) GetArticles(ctx context.Context) (*model.Articles, erro
 
 	if err := r.client.Get(ctx, url, opts); err != nil {
 		if r.isNotFound(err) {
-			articles.Meta = meta.Strings(ctx, "")
 			articles.Info = r.info
 
 			return articles, nil
 		}
 
 		err := &model.Error{
-			Meta: meta.Strings(ctx, ""),
 			Info: r.info,
 			Err:  se.Prefix("repository: get articles", err),
 		}
@@ -71,7 +68,6 @@ func (r *HTTPRepository) GetArticles(ctx context.Context) (*model.Articles, erro
 		return nil, err
 	}
 
-	articles.Meta = meta.Strings(ctx, "")
 	articles.Info = r.info
 
 	return articles, nil
@@ -89,7 +85,6 @@ func (r *HTTPRepository) GetArticle(ctx context.Context, slug string) (*model.Ar
 		return nil, err
 	}
 
-	article.Meta = meta.Strings(ctx, "")
 	article.Info = r.info
 	article.Body = body
 
@@ -135,7 +130,6 @@ func (r *HTTPRepository) get(ctx context.Context, url string, opts *rest.Options
 		}
 
 		err := &model.Error{
-			Meta: meta.Strings(ctx, ""),
 			Info: r.info,
 			Err:  se.Prefix("repository: get url", err),
 		}
