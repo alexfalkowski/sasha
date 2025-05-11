@@ -4,8 +4,8 @@ import "github.com/alexfalkowski/sasha/internal/site/meta"
 
 // Error for site.
 type Error struct {
-	*meta.Info
-	Err error
+	Info *meta.Info
+	Err  error
 }
 
 // Error satisfies the error interface.
