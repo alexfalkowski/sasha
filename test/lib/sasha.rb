@@ -16,8 +16,16 @@ module Sasha
         bucket_state == 'operational'
       end
 
-      def bucket_missing?
-        bucket_state == 'missing'
+      def bucket_missing_articles?
+        bucket_state == 'missing_articles'
+      end
+
+      def bucket_missing_config?
+        bucket_state == 'missing_config'
+      end
+
+      def bucket_missing_body?
+        bucket_state == 'missing_body'
       end
 
       def bucket_erroneous?

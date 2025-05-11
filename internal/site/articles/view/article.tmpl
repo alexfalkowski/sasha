@@ -1,35 +1,6 @@
 {{ define "content" }}
   <article>
-    <h2>{{.Name}}</h2>
-    <p>
-      {{.Body}}
-    </p>
-    {{ if gt (len .Images) 0 }}
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Image</th>
-            <th scope="col">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{ range .Images }}
-            <tr>
-              <td>
-                <figure>
-                  <img src="{{ .Name }}" alt="{{ .Description }}"></img>
-                  <figcaption>Image by Sasha</figcaption>
-                </figure>
-              </td>
-              <td>{{ .Description }}</td>
-            </tr>
-          {{ end }}
-        </tbody>
-      </table>
-    {{ else }}
-      <p>
-        No images!
-      </p>
-    {{ end }}
+    <h2>{{ .Name }}</h2>
+    {{ renderBody .Slug .Body }}
   </article>
 {{ end }}
