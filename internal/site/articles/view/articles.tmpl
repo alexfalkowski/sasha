@@ -10,7 +10,7 @@
     <p>
       Vacations are important for overall well-being, providing a break from routine, reducing stress, and improving physical and mental health.
     </p>
-    {{ if gt (len .Articles) 0 }}
+    {{ if gt (len .Model.Articles) 0 }}
       <table>
         <thead>
           <tr>
@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          {{ range .Articles }}
+          {{ range .Model.Articles }}
             <tr>
               <td>
                 <a hx-put="/article/{{ .Slug }}" hx-target="#main" hx-target-*="#main" hx-push-url="true">{{ .Name }}</a>

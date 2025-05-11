@@ -1,6 +1,6 @@
 {{ define "content" }}
   <article>
-    <h2>{{ .Name }}</h2>
-    {{ renderBody .Slug .Body }}
+    <h2>{{ .Model.Name }}</h2>
+    {{ renderBody .Model.Slug .Model.Body }}
   </article>
 {{ end }}
