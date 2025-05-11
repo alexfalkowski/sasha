@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"net/http"
@@ -11,14 +10,31 @@ import (
 	"github.com/alexfalkowski/go-service/mime"
 	"github.com/alexfalkowski/go-service/net/http/rest"
 	"github.com/alexfalkowski/go-service/net/http/status"
+	"github.com/alexfalkowski/go-service/sync"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
 	sm "github.com/alexfalkowski/sasha/internal/site/meta"
+	"go.uber.org/fx"
 )
 
-// NewRepository for books.
-func NewRepository(info *sm.Info, config *articles.Config, client *rest.Client) Repository {
-	return &HTTPRepository{info: info, config: config, client: client}
+// Params for repository.
+type Params struct {
+	fx.In
+
+	Info   *sm.Info
+	Config *articles.Config
+	Client *rest.Client
+	Pool   *sync.BufferPool
+}
+
+// NewRepository for repository.
+func NewRepository(params Params) Repository {
+	return &HTTPRepository{
+		info:   params.Info,
+		config: params.Config,
+		client: params.Client,
+		pool:   params.Pool,
+	}
 }
 
 // HTTPRepository uses a client to get from a site (public bucket).
@@ -26,6 +42,7 @@ type HTTPRepository struct {
 	info   *sm.Info
 	config *articles.Config
 	client *rest.Client
+	pool   *sync.BufferPool
 }
 
 // GetArticles from the public bucket.
@@ -95,7 +112,9 @@ func (r *HTTPRepository) getArticleConfig(ctx context.Context, slug string) (*mo
 }
 
 func (r *HTTPRepository) getArticleBody(ctx context.Context, slug string) ([]byte, error) {
-	buffer := &bytes.Buffer{}
+	buffer := r.pool.Get()
+	defer r.pool.Put(buffer)
+
 	opts := &rest.Options{
 		ContentType: mime.MarkdownMediaType,
 		Response:    buffer,
@@ -106,7 +125,7 @@ func (r *HTTPRepository) getArticleBody(ctx context.Context, slug string) ([]byt
 		return nil, err
 	}
 
-	return buffer.Bytes(), nil
+	return r.pool.Copy(buffer), nil
 }
 
 func (r *HTTPRepository) get(ctx context.Context, url string, opts *rest.Options) error {
