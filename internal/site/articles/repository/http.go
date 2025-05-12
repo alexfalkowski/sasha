@@ -7,11 +7,11 @@ import (
 
 	se "github.com/alexfalkowski/go-service/errors"
 	"github.com/alexfalkowski/go-service/mime"
-	"github.com/alexfalkowski/go-service/net/http/rest"
 	"github.com/alexfalkowski/go-service/net/http/status"
 	"github.com/alexfalkowski/go-service/sync"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
+	"github.com/alexfalkowski/sasha/internal/site/articles/rest"
 	sm "github.com/alexfalkowski/sasha/internal/site/meta"
 	"go.uber.org/fx"
 )
