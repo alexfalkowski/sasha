@@ -6,7 +6,7 @@ Feature: Sasha
   Scenario Outline: Visit sections with public bucket and no cache
     Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then I should see "<section>" succesfully
+    Then I should see "<section>" with layout "<layout>" succesfully
 
     Examples:
       | layout  | section  |
@@ -22,7 +22,7 @@ Feature: Sasha
     Given I start the system
     When I visit "<section>" with layout "<layout>"
     And I visit "<section>" with layout "<layout>"
-    Then I should see "<section>" succesfully
+    Then I should see "<section>" with layout "<layout>" succesfully
 
     Examples:
       | layout  | section  |
@@ -37,7 +37,7 @@ Feature: Sasha
   Scenario Outline: Visit sections with missing config
     Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then the "<section>" is not found
+    Then the "<section>" with layout "<layout>" is not found
 
     Examples:
       | layout  | section |
@@ -48,7 +48,7 @@ Feature: Sasha
   Scenario Outline: Visit sections with missing body
     Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then the "<section>" is not found
+    Then the "<section>" with layout "<layout>" is not found
 
     Examples:
       | layout  | section |
@@ -59,7 +59,7 @@ Feature: Sasha
   Scenario Outline: Visit sections with missing articles
     Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then I should see "<section>" succesfully
+    Then I should see "<section>" with layout "<layout>" succesfully
 
     Examples:
       | layout  | section  |
@@ -70,7 +70,7 @@ Feature: Sasha
   Scenario Outline: Visit sections with erroneous public bucket
     Given I start the system
     When I visit "<section>" with layout "<layout>"
-    Then the "<section>" is erroneous
+    Then the "<section>" with layout "<layout>" is erroneous
 
     Examples:
       | layout  | section  |
@@ -84,7 +84,7 @@ Feature: Sasha
     Given I start the system
     And I set the proxy for server "bucket" to "<failure>"
     When I visit "<section>" with layout "<layout>"
-    Then the "<section>" is erroneous
+    Then the "<section>" with layout "<layout>" is erroneous
     And I should reset the proxy for server "bucket"
 
     Examples:
