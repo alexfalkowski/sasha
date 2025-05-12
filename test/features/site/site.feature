@@ -3,9 +3,25 @@ Feature: Sasha
   Sasha is a website for sasha-adventures.com
 
   @operational
-  Scenario Outline: Visit sections with public bucket
+  Scenario Outline: Visit sections with public bucket and no cache
     Given I start the system
     When I visit "<section>" with layout "<layout>"
+    Then I should see "<section>" succesfully
+
+    Examples:
+      | layout  | section  |
+      | full    | home     |
+      | full    | articles |
+      | full    | article  |
+      | partial | home     |
+      | partial | articles |
+      | partial | article  |
+
+  @operational
+  Scenario Outline: Visit sections with public bucket and cached
+    Given I start the system
+    When I visit "<section>" with layout "<layout>"
+    And I visit "<section>" with layout "<layout>"
     Then I should see "<section>" succesfully
 
     Examples:
