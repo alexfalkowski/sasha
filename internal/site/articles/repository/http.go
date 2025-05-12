@@ -60,10 +60,8 @@ func (r *HTTPRepository) GetArticles(ctx context.Context) (*model.Articles, erro
 			return articles, nil
 		}
 
-		err := &model.Error{
-			Info: r.info,
-			Err:  se.Prefix("repository: get articles", err),
-		}
+		err := model.NewError(http.StatusInternalServerError, se.Prefix("repository: get articles", err))
+		err.Info = r.info
 
 		return nil, err
 	}
@@ -125,14 +123,16 @@ func (r *HTTPRepository) getArticleBody(ctx context.Context, slug string) ([]byt
 
 func (r *HTTPRepository) get(ctx context.Context, url string, opts *rest.Options) error {
 	if err := r.client.Get(ctx, url, opts); err != nil {
+		var code int
+
 		if r.isNotFound(err) {
-			err = ErrNotFound
+			code = http.StatusNotFound
+		} else {
+			code = http.StatusInternalServerError
 		}
 
-		err := &model.Error{
-			Info: r.info,
-			Err:  se.Prefix("repository: get url", err),
-		}
+		err := model.NewError(code, se.Prefix("repository: get url", err))
+		err.Info = r.info
 
 		return err
 	}

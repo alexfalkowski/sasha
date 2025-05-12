@@ -34,7 +34,7 @@ When('I visit {string} with layout {string}') do |section, layout|
   @response = Sasha::V1.client.send("#{method}_#{section}", opts)
 end
 
-Then('I should see {string} succesfully') do |section|
+Then('I should see {string} with layout {string} succesfully') do |section, layout|
   expect(@response.code).to eq(200)
   expect(@response.headers[:content_type]).to eq('text/html; charset=utf-8')
 
@@ -46,19 +46,39 @@ Then('I should see {string} succesfully') do |section|
     'article_not_found' => 'repository: get article: not found'
   }
 
+  body = @response.body
+
+  if layout == 'full'
+    expect(body).to include(Time.new.year.to_s)
+    expect(body).to include('vdevelopment')
+  end
+
   expected_section = expected[section]
   if expected_section
-    body = @response.body
     html = Nokogiri::HTML.parse(body)
 
-    expect(html.text).to include(expected[section])
+    expect(html.text).to include(expected_section)
   end
 end
 
-Then('the {string} is not found') do |_string|
+Then('the {string} with layout {string} is not found') do |_section, layout|
   expect(@response.code).to eq(404)
+
+  if layout == 'full'
+    body = @response.body
+
+    expect(body).to include(Time.new.year.to_s)
+    expect(body).to include('vdevelopment')
+  end
 end
 
-Then('the {string} is erroneous') do |_string|
+Then('the {string} with layout {string} is erroneous') do |_section, layout|
   expect(@response.code).to eq(500)
+
+  if layout == 'full'
+    body = @response.body
+
+    expect(body).to include(Time.new.year.to_s)
+    expect(body).to include('vdevelopment')
+  end
 end
