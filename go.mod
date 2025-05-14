@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/alexfalkowski/go-health v1.22.0
-	github.com/alexfalkowski/go-service v1.601.2
+	github.com/alexfalkowski/go-service v1.603.0
 	github.com/go-sprout/sprout v1.0.0
 	github.com/gomarkdown/markdown v0.0.0-20250311123330-531bef5e742b
 	go.uber.org/fx v1.24.0
@@ -122,7 +122,7 @@ require (
 	golang.org/x/text v0.25.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250218202821-56aae31c358a // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250218202821-56aae31c358a // indirect
-	google.golang.org/grpc v1.72.0 // indirect
+	google.golang.org/grpc v1.72.1 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
