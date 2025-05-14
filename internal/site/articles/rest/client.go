@@ -74,5 +74,15 @@ func (c *Client) Get(ctx context.Context, url string, opts *Options) error {
 		return err
 	}
 
-	return c.cache.Persist(ctx, key, opts.Response, 15*time.Minute)
+	return c.persist(ctx, key, opts.Response)
+}
+
+func (c *Client) persist(ctx context.Context, key string, response any) error {
+	if err := c.cache.Persist(ctx, key, response, 15*time.Minute); err != nil {
+		return err
+	}
+
+	_, err := c.cache.Get(ctx, key, response)
+
+	return err
 }
