@@ -8,6 +8,7 @@ linters:
     - funcorder
     - gochecknoglobals
     - ireturn
+    - mnd
     - nilnil
     - paralleltest
     - tagalign

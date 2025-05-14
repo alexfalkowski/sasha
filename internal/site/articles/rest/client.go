@@ -3,7 +3,6 @@ package rest
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/alexfalkowski/go-service/cache/cacheable"
 	"github.com/alexfalkowski/go-service/env"
@@ -12,6 +11,7 @@ import (
 	"github.com/alexfalkowski/go-service/telemetry/logger"
 	"github.com/alexfalkowski/go-service/telemetry/metrics"
 	"github.com/alexfalkowski/go-service/telemetry/tracer"
+	"github.com/alexfalkowski/go-service/time"
 	"github.com/alexfalkowski/go-service/transport/http"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"go.uber.org/fx"
@@ -74,5 +74,5 @@ func (c *Client) Get(ctx context.Context, url string, opts *Options) error {
 		return err
 	}
 
-	return c.cache.Persist(ctx, key, opts.Response, time.Hour)
+	return c.cache.Persist(ctx, key, opts.Response, 15*time.Minute)
 }
