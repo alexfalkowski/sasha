@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/alexfalkowski/go-service/cache/cacheable"
+	"github.com/alexfalkowski/go-service/cache/cacher"
 	"github.com/alexfalkowski/go-service/env"
 	"github.com/alexfalkowski/go-service/id"
 	"github.com/alexfalkowski/go-service/net/http/rest"
@@ -22,7 +22,7 @@ type Params struct {
 	fx.In
 	Lifecycle fx.Lifecycle
 	ID        id.Generator
-	Cache     cacheable.Interface
+	Cache     cacher.Cache
 	Tracer    *tracer.Tracer
 	Meter     *metrics.Meter
 	Config    *articles.Config
@@ -54,7 +54,7 @@ type Options = rest.Options
 // Client for articles.
 type Client struct {
 	client *rest.Client
-	cache  cacheable.Interface
+	cache  cacher.Cache
 }
 
 // Get a url with opts. This uses a cache for 1 hour.
