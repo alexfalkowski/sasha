@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"io"
 
+	"github.com/alexfalkowski/go-service/bytes"
 	"github.com/alexfalkowski/go-service/net/http/mvc"
 	"github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"github.com/go-sprout/sprout"
@@ -79,7 +80,7 @@ func (r *ArticleRegistry) RenderBody(slug string, body []byte) template.HTML {
 	}
 	renderer := html.NewRenderer(opts)
 
-	return template.HTML(string(markdown.Render(document, renderer)))
+	return template.HTML(bytes.String(markdown.Render(document, renderer)))
 }
 
 func (r *ArticleRegistry) image(slug string) html.RenderNodeFunc {
@@ -90,8 +91,8 @@ func (r *ArticleRegistry) image(slug string) html.RenderNodeFunc {
 		}
 
 		if entering {
-			src := fmt.Sprintf("%s/%s/%s", r.config.Address, slug, string(image.Destination))
-			alt := string(image.Title)
+			src := fmt.Sprintf("%s/%s/%s", r.config.Address, slug, bytes.String(image.Destination))
+			alt := bytes.String(image.Title)
 			_, _ = fmt.Fprintf(writer, `<img src="%s" alt="%s">`, src, alt)
 		} else {
 			_, _ = fmt.Fprint(writer, "</img>")
