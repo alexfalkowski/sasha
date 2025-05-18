@@ -12,6 +12,8 @@ processes:
     host: 127.0.0.1
     port: 11000
     log: reports/server.log
+    environment:
+      SERVICE_VERSION: "v1.0.0"
 servers:
   -
     name: bucket
