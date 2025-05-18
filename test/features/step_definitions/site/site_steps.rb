@@ -50,7 +50,7 @@ Then('I should see {string} with layout {string} succesfully') do |section, layo
 
   if layout == 'full'
     expect(body).to include(Time.new.year.to_s)
-    expect(body).to include('vdevelopment')
+    expect(body).to include('v1.0.0')
   end
 
   expected_section = expected[section]
@@ -68,7 +68,7 @@ Then('the {string} with layout {string} is not found') do |_section, layout|
     body = @response.body
 
     expect(body).to include(Time.new.year.to_s)
-    expect(body).to include('vdevelopment')
+    expect(body).to include('v1.0.0')
   end
 end
 
@@ -79,6 +79,6 @@ Then('the {string} with layout {string} is erroneous') do |_section, layout|
     body = @response.body
 
     expect(body).to include(Time.new.year.to_s)
-    expect(body).to include('vdevelopment')
+    expect(body).to include('v1.0.0')
   end
 end
