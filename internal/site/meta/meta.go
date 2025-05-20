@@ -3,8 +3,8 @@ package meta
 import (
 	"time"
 
-	"github.com/alexfalkowski/go-service/env"
-	"github.com/alexfalkowski/go-service/meta"
+	"github.com/alexfalkowski/go-service/v2/env"
+	"github.com/alexfalkowski/go-service/v2/meta"
 )
 
 // Map is an alias of meta.Map.

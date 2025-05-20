@@ -1,7 +1,7 @@
 package route
 
 import (
-	"github.com/alexfalkowski/go-service/net/http/mvc"
+	"github.com/alexfalkowski/go-service/v2/net/http/mvc"
 	"github.com/alexfalkowski/sasha/internal/site/meta"
 	"github.com/alexfalkowski/sasha/internal/site/root/controller"
 	"github.com/alexfalkowski/sasha/internal/site/root/view"

@@ -1,7 +1,7 @@
 package health
 
 import (
-	"github.com/alexfalkowski/go-service/health"
+	"github.com/alexfalkowski/go-service/v2/health"
 	"go.uber.org/fx"
 )
 

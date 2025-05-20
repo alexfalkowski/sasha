@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/alexfalkowski/go-service/config"
+	"github.com/alexfalkowski/go-service/v2/config"
 	"github.com/alexfalkowski/sasha/internal/health"
 	"github.com/alexfalkowski/sasha/internal/site"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"

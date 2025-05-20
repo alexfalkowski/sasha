@@ -1,6 +1,6 @@
 package robots
 
-import "github.com/alexfalkowski/go-service/net/http/mvc"
+import "github.com/alexfalkowski/go-service/v2/net/http/mvc"
 
 // Register robots.
 func Register() {

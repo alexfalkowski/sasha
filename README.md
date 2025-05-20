@@ -10,7 +10,7 @@ This site contains all my lovely wifes adventures.
 
 ## Background
 
-Try the ideas outlined in https://alejandrofalkowski.substack.com/p/hyperprogress
+Try the ideas outlined in <https://alejandrofalkowski.substack.com/p/hyperprogress>
 
 ## Design
 
@@ -31,6 +31,7 @@ The project follows the structure in [golang-standards/project-layout](https://g
 ### Dependencies
 
 Please make sure that you have the following installed:
+
 - [Ruby](https://www.ruby-lang.org/en/)
 - [Golang](https://go.dev/)
 

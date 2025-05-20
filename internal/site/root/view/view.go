@@ -1,6 +1,6 @@
 package view
 
-import "github.com/alexfalkowski/go-service/net/http/mvc"
+import "github.com/alexfalkowski/go-service/v2/net/http/mvc"
 
 // NewRoot view.
 func NewRoot() (*mvc.View, *mvc.View) {
