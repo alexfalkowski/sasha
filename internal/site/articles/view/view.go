@@ -5,8 +5,8 @@ import (
 	"html/template"
 	"io"
 
-	"github.com/alexfalkowski/go-service/bytes"
-	"github.com/alexfalkowski/go-service/net/http/mvc"
+	"github.com/alexfalkowski/go-service/v2/bytes"
+	"github.com/alexfalkowski/go-service/v2/net/http/mvc"
 	"github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"github.com/go-sprout/sprout"
 	"github.com/gomarkdown/markdown"

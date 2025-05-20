@@ -3,7 +3,7 @@ package controller
 import (
 	"context"
 
-	"github.com/alexfalkowski/go-service/net/http/mvc"
+	"github.com/alexfalkowski/go-service/v2/net/http/mvc"
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
 	"github.com/alexfalkowski/sasha/internal/site/articles/repository"
 )
