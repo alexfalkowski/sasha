@@ -17,6 +17,8 @@ import (
 	"go.uber.org/fx"
 )
 
+const ttl = 15 * time.Minute
+
 // Params for rest.
 type Params struct {
 	fx.In
@@ -57,7 +59,7 @@ type Client struct {
 	cache  cacher.Cache
 }
 
-// Get a url with opts. This uses a cache for 1 hour.
+// Get a url with opts. This will cache according to ttl.
 func (c *Client) Get(ctx context.Context, url string, opts *Options) error {
 	key := fmt.Sprintf("%s/%s", opts.ContentType, url)
 
@@ -77,8 +79,9 @@ func (c *Client) Get(ctx context.Context, url string, opts *Options) error {
 	return c.persist(ctx, key, opts.Response)
 }
 
+// persist gets the value as the response is reader that will get drained so we need to hydrate.
 func (c *Client) persist(ctx context.Context, key string, response any) error {
-	if err := c.cache.Persist(ctx, key, response, 15*time.Minute); err != nil {
+	if err := c.cache.Persist(ctx, key, response, ttl); err != nil {
 		return err
 	}
 
