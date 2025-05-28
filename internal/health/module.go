@@ -1,9 +1,6 @@
 package health
 
-import (
-	"github.com/alexfalkowski/go-service/v2/health"
-	"go.uber.org/fx"
-)
+import "go.uber.org/fx"
 
 // Module for fx.
 var Module = fx.Options(
@@ -11,5 +8,4 @@ var Module = fx.Options(
 	fx.Provide(NewLivenessObserver),
 	fx.Provide(NewReadinessObserver),
 	fx.Provide(NewRegistrations),
-	health.Module,
 )
