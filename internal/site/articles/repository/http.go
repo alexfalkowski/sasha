@@ -3,16 +3,16 @@ package repository
 import (
 	"context"
 	"fmt"
-	"net/http"
 
-	se "github.com/alexfalkowski/go-service/v2/errors"
+	"github.com/alexfalkowski/go-service/v2/errors"
 	"github.com/alexfalkowski/go-service/v2/mime"
+	"github.com/alexfalkowski/go-service/v2/net/http"
 	"github.com/alexfalkowski/go-service/v2/net/http/status"
 	"github.com/alexfalkowski/go-service/v2/sync"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
 	"github.com/alexfalkowski/sasha/internal/site/articles/rest"
-	sm "github.com/alexfalkowski/sasha/internal/site/meta"
+	"github.com/alexfalkowski/sasha/internal/site/meta"
 	"go.uber.org/fx"
 )
 
@@ -20,7 +20,7 @@ import (
 type Params struct {
 	fx.In
 
-	Info   *sm.Info
+	Info   *meta.Info
 	Config *articles.Config
 	Client *rest.Client
 	Pool   *sync.BufferPool
@@ -38,7 +38,7 @@ func NewRepository(params Params) Repository {
 
 // HTTPRepository uses a client to get from a site (public bucket).
 type HTTPRepository struct {
-	info   *sm.Info
+	info   *meta.Info
 	config *articles.Config
 	client *rest.Client
 	pool   *sync.BufferPool
@@ -60,7 +60,7 @@ func (r *HTTPRepository) GetArticles(ctx context.Context) (*model.Articles, erro
 			return articles, nil
 		}
 
-		err := model.NewError(http.StatusInternalServerError, se.Prefix("repository: get articles", err))
+		err := model.NewError(http.StatusInternalServerError, errors.Prefix("repository: get articles", err))
 		err.Info = r.info
 
 		return nil, err
@@ -131,7 +131,7 @@ func (r *HTTPRepository) get(ctx context.Context, url string, opts *rest.Options
 			code = http.StatusInternalServerError
 		}
 
-		err := model.NewError(code, se.Prefix("repository: get url", err))
+		err := model.NewError(code, errors.Prefix("repository: get url", err))
 		err.Info = r.info
 
 		return err
