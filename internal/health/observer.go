@@ -1,21 +1,18 @@
 package health
 
 import (
-	"github.com/alexfalkowski/go-health/server"
-	"github.com/alexfalkowski/go-service/v2/health/transport/http"
+	health "github.com/alexfalkowski/go-health/server"
+	http "github.com/alexfalkowski/go-service/v2/transport/http/health"
 )
 
-// NewHealthObserver for HTTP.
-func NewHealthObserver(healthServer *server.Server) *http.HealthObserver {
-	return &http.HealthObserver{Observer: healthServer.Observe("online")}
+func httpHealthObserver(server *health.Server) *http.HealthObserver {
+	return &http.HealthObserver{Observer: server.Observe("online")}
 }
 
-// NewLivenessObserver for HTTP.
-func NewLivenessObserver(healthServer *server.Server) *http.LivenessObserver {
-	return &http.LivenessObserver{Observer: healthServer.Observe("noop")}
+func httpLivenessObserver(server *health.Server) *http.LivenessObserver {
+	return &http.LivenessObserver{Observer: server.Observe("noop")}
 }
 
-// NewReadinessObserver for HTTP.
-func NewReadinessObserver(healthServer *server.Server) *http.ReadinessObserver {
-	return &http.ReadinessObserver{Observer: healthServer.Observe("noop")}
+func httpReadinessObserver(server *health.Server) *http.ReadinessObserver {
+	return &http.ReadinessObserver{Observer: server.Observe("noop")}
 }
