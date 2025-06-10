@@ -1,11 +1,11 @@
 package root
 
 import (
+	"github.com/alexfalkowski/go-service/v2/di"
 	"github.com/alexfalkowski/sasha/internal/site/root/route"
-	"go.uber.org/fx"
 )
 
 // Module for fx.
-var Module = fx.Options(
+var Module = di.Module(
 	route.Module,
 )

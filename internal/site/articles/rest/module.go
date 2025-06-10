@@ -1,8 +1,8 @@
 package rest
 
-import "go.uber.org/fx"
+import "github.com/alexfalkowski/go-service/v2/di"
 
 // Module for fx.
-var Module = fx.Options(
-	fx.Provide(NewClient),
+var Module = di.Module(
+	di.Constructor(NewClient),
 )
