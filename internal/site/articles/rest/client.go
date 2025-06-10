@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/alexfalkowski/go-service/v2/cache/cacher"
+	"github.com/alexfalkowski/go-service/v2/di"
 	"github.com/alexfalkowski/go-service/v2/env"
 	"github.com/alexfalkowski/go-service/v2/id"
 	"github.com/alexfalkowski/go-service/v2/net/http/rest"
@@ -14,15 +15,15 @@ import (
 	"github.com/alexfalkowski/go-service/v2/time"
 	"github.com/alexfalkowski/go-service/v2/transport/http"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
-	"go.uber.org/fx"
 )
 
 const ttl = 15 * time.Minute
 
 // Params for rest.
 type Params struct {
-	fx.In
-	Lifecycle fx.Lifecycle
+	di.In
+
+	Lifecycle di.Lifecycle
 	ID        id.Generator
 	Cache     cacher.Cache
 	Tracer    *tracer.Tracer

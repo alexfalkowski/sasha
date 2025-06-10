@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/alexfalkowski/go-service/v2/di"
 	"github.com/alexfalkowski/go-service/v2/errors"
 	"github.com/alexfalkowski/go-service/v2/mime"
 	"github.com/alexfalkowski/go-service/v2/net/http"
@@ -13,12 +14,11 @@ import (
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
 	"github.com/alexfalkowski/sasha/internal/site/articles/rest"
 	"github.com/alexfalkowski/sasha/internal/site/meta"
-	"go.uber.org/fx"
 )
 
 // Params for repository.
 type Params struct {
-	fx.In
+	di.In
 
 	Info   *meta.Info
 	Config *articles.Config
