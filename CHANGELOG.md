@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [v1.98.0](https://github.com/alexfalkowski/sasha/releases/tag/v1.98.0) - 2025-06-14
+
+- [`92c439f`](https://github.com/alexfalkowski/sasha/commit/92c439f1f08babdd66cbbda9e495029e9083b227) feat(ci): use correct working_directory (#166)
+- [`a90f268`](https://github.com/alexfalkowski/sasha/commit/a90f268b0fed06089727c8100cb652556d6cdb60) build(ci): add run: make trivy-repo (#165)
+
 ## [v1.97.0](https://github.com/alexfalkowski/sasha/releases/tag/v1.97.0) - 2025-06-14
 
 - [`40015f7`](https://github.com/alexfalkowski/sasha/commit/40015f70d23b75524705123056233f86c0f93c1f) feat(ci): build multi platform (#164)
