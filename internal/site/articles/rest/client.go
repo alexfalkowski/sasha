@@ -14,6 +14,7 @@ import (
 	"github.com/alexfalkowski/go-service/v2/telemetry/tracer"
 	"github.com/alexfalkowski/go-service/v2/time"
 	"github.com/alexfalkowski/go-service/v2/transport/http"
+	"github.com/alexfalkowski/go-service/v2/transport/http/limiter"
 	articles "github.com/alexfalkowski/sasha/internal/site/articles/config"
 )
 
@@ -30,6 +31,7 @@ type Params struct {
 	Meter     *metrics.Meter
 	Config    *articles.Config
 	Logger    *logger.Logger
+	Limiter   *limiter.Limiter
 	UserAgent env.UserAgent
 }
 
@@ -39,7 +41,7 @@ func NewClient(params Params) *Client {
 		http.WithClientLogger(params.Logger), http.WithClientTracer(params.Tracer),
 		http.WithClientMetrics(params.Meter), http.WithClientRetry(params.Config.Retry),
 		http.WithClientUserAgent(params.UserAgent), http.WithClientTimeout(params.Config.Timeout),
-		http.WithClientID(params.ID),
+		http.WithClientID(params.ID), http.WithClientLimiter(params.Limiter),
 	)
 
 	return &Client{
