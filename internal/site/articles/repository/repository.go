@@ -1,8 +1,7 @@
 package repository
 
 import (
-	"context"
-
+	"github.com/alexfalkowski/go-service/v2/context"
 	"github.com/alexfalkowski/sasha/internal/site/articles/model"
 )
 

@@ -1,8 +1,7 @@
 package controller
 
 import (
-	"context"
-
+	"github.com/alexfalkowski/go-service/v2/context"
 	"github.com/alexfalkowski/go-service/v2/net/http/mvc"
 	"github.com/alexfalkowski/sasha/internal/site/meta"
 	"github.com/alexfalkowski/sasha/internal/site/root/model"
