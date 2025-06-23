@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"context"
 	"fmt"
 
+	"github.com/alexfalkowski/go-service/v2/context"
 	"github.com/alexfalkowski/go-service/v2/di"
 	"github.com/alexfalkowski/go-service/v2/errors"
 	"github.com/alexfalkowski/go-service/v2/mime"
